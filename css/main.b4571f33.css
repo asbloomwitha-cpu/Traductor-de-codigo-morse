@@ -1,0 +1,493 @@
+/* ==========================================================
+   ESTILOS PRINCIPALES - TRADUCTOR DE CÓDIGO MORSE
+   Diseño moderno, limpio y adaptable a móviles y PC
+   ========================================================== */
+
+/* Variables de color y tipografía */
+:root {
+  --fondo-principal: #0f172a;      /* Fondo oscuro azul pizarra */
+  --fondo-tarjeta: #1e293b;        /* Fondo de las tarjetas */
+  --fondo-caja-texto: #0b1120;     /* Fondo de las áreas de texto */
+  --borde-suave: #334155;          /* Bordes de tarjetas y cajas */
+  
+  --color-primario: #3b82f6;       /* Azul moderno */
+  --color-primario-hover: #2563eb;
+  --color-dorado: #f59e0b;         /* Ámbar para telegrafía y LED */
+  --color-dorado-brillo: rgba(245, 158, 11, 0.5);
+  --color-exito: #10b981;          /* Verde para acciones exitosas */
+  --color-peligro: #ef4444;        /* Rojo para botón detener */
+
+  --texto-blanco: #f8fafc;
+  --texto-secundario: #94a3b8;
+  --texto-apagado: #64748b;
+
+  --fuente-ui: 'Outfit', system-ui, -apple-system, sans-serif;
+  --fuente-morse: 'JetBrains Mono', monospace, monospace;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente-ui);
+  background-color: var(--fondo-principal);
+  color: var(--texto-blanco);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+/* ==========================================================
+   ENCABEZADO
+   ========================================================== */
+.cabecera {
+  background-color: var(--fondo-tarjeta);
+  border-bottom: 1px solid var(--borde-suave);
+  padding: 1.25rem 1rem;
+}
+
+.contenedor-cabecera {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.icono-logo {
+  font-size: 2.2rem;
+}
+
+.logo h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--texto-blanco);
+}
+
+.subtitulo {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
+.badge-modo {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ==========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================== */
+.contenedor-principal {
+  max-width: 1000px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  flex: 1;
+  width: 100%;
+}
+
+/* ==========================================================
+   BARRA DE HERRAMIENTAS (MODO, LED, EJEMPLOS)
+   ========================================================== */
+.barra-herramientas {
+  background-color: var(--fondo-tarjeta);
+  border: 1px solid var(--borde-suave);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.grupo-modo {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Indicador LED */
+.indicador-led-caja {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--fondo-caja-texto);
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--borde-suave);
+}
+
+.luz-led {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #475569;
+  transition: all 0.1s ease;
+}
+
+.luz-led.activa {
+  background-color: #fbbf24;
+  box-shadow: 0 0 14px 4px var(--color-dorado-brillo);
+}
+
+.info-led {
+  display: flex;
+  flex-direction: column;
+}
+
+.etiqueta-led {
+  font-size: 0.65rem;
+  color: var(--texto-apagado);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.estado-led {
+  font-size: 0.75rem;
+  color: var(--texto-secundario);
+  font-weight: 600;
+}
+
+/* Ejemplos rápidos */
+.ejemplos-rapidos {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.titulo-ejemplos {
+  font-size: 0.8rem;
+  color: var(--texto-apagado);
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+
+.chip-ejemplo {
+  background-color: var(--fondo-caja-texto);
+  color: var(--texto-secundario);
+  border: 1px solid var(--borde-suave);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: var(--fuente-ui);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-ejemplo:hover {
+  background-color: var(--borde-suave);
+  color: var(--texto-blanco);
+  border-color: #64748b;
+}
+
+/* ==========================================================
+   CUADRÍCULA DE TRADUCCIÓN (2 TARJETAS)
+   ========================================================== */
+.cuadricula-traductor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .cuadricula-traductor {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tarjeta-traductor {
+  background-color: var(--fondo-tarjeta);
+  border: 1px solid var(--borde-suave);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.encabezado-tarjeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.encabezado-tarjeta h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--texto-blanco);
+}
+
+/* Cajas de texto */
+.area-texto {
+  width: 100%;
+  background-color: var(--fondo-caja-texto);
+  border: 1px solid var(--borde-suave);
+  border-radius: 10px;
+  padding: 1rem;
+  color: var(--texto-blanco);
+  font-family: var(--fuente-ui);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.area-texto:focus {
+  border-color: var(--color-primario);
+}
+
+.area-morse {
+  font-family: var(--fuente-morse);
+  letter-spacing: 2px;
+  color: #38bdf8;
+  font-weight: 500;
+}
+
+/* Botones para morse rápido */
+.botones-morse {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding-top: 0.25rem;
+}
+
+.texto-ayuda {
+  font-size: 0.75rem;
+  color: var(--texto-apagado);
+  margin-right: 0.2rem;
+}
+
+.btn-morse {
+  background-color: var(--fondo-caja-texto);
+  border: 1px solid var(--borde-suave);
+  color: var(--texto-blanco);
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: var(--fuente-ui);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-morse:hover {
+  background-color: #334155;
+  border-color: #64748b;
+}
+
+.btn-morse:active {
+  transform: scale(0.96);
+}
+
+.btn-morse-borrar {
+  color: #f87171;
+}
+
+/* Acciones de la salida */
+.barra-acciones-salida {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  padding-top: 0.25rem;
+}
+
+.nota-audio {
+  font-size: 0.75rem;
+  color: var(--texto-apagado);
+}
+
+/* ==========================================================
+   BOTONES
+   ========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--fuente-ui);
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-modo {
+  background-color: var(--color-primario);
+  color: white;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-modo:hover {
+  background-color: var(--color-primario-hover);
+}
+
+.icono-btn {
+  font-size: 1.1rem;
+}
+
+.btn-chico {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-secundario {
+  background-color: #334155;
+  color: var(--texto-blanco);
+  border: 1px solid transparent;
+}
+
+.btn-secundario:hover {
+  background-color: #475569;
+}
+
+.btn-exito {
+  background-color: var(--color-exito) !important;
+  color: white !important;
+}
+
+.btn-reproducir {
+  background-color: #059669;
+  color: white;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.9rem;
+}
+
+.btn-reproducir:hover {
+  background-color: #10b981;
+}
+
+.btn-detener {
+  background-color: var(--color-peligro);
+  color: white;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.9rem;
+}
+
+.btn-detener:hover {
+  background-color: #dc2626;
+}
+
+.oculto {
+  display: none !important;
+}
+
+/* ==========================================================
+   SECCIÓN DIDÁCTICA: ALFABETO MORSE
+   ========================================================== */
+.seccion-alfabeto {
+  background-color: var(--fondo-tarjeta);
+  border: 1px solid var(--borde-suave);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.encabezado-alfabeto {
+  margin-bottom: 1.25rem;
+}
+
+.encabezado-alfabeto h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.encabezado-alfabeto p {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
+.rejilla-alfabeto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+  gap: 0.6rem;
+}
+
+.tarjeta-morse {
+  background-color: var(--fondo-caja-texto);
+  border: 1px solid var(--borde-suave);
+  border-radius: 8px;
+  padding: 0.6rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tarjeta-morse:hover {
+  border-color: var(--color-dorado);
+  background-color: rgba(245, 158, 11, 0.1);
+  transform: translateY(-2px);
+}
+
+.tarjeta-morse .letra {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--texto-blanco);
+}
+
+.tarjeta-morse .codigo {
+  font-size: 0.75rem;
+  font-family: var(--fuente-morse);
+  color: #38bdf8;
+  margin-top: 0.2rem;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================
+   PIE DE PÁGINA
+   ========================================================== */
+.pie-pagina {
+  background-color: var(--fondo-tarjeta);
+  border-top: 1px solid var(--borde-suave);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.pie-pagina p {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
+.detalle-pie {
+  font-size: 0.75rem;
+  color: var(--texto-apagado);
+  margin-top: 0.25rem;
+}
+
+
+/*# sourceMappingURL=main.b4571f33.css.map*/
