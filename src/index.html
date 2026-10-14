@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traductor de Código Morse</title>
+
+  <!-- Tipografías de Google Fonts: Outfit (limpia y moderna) y JetBrains Mono (para el código morse) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Encabezado principal -->
+  <header class="cabecera">
+    <div class="contenedor-cabecera">
+      <div class="logo">
+        <span class="icono-logo">📻</span>
+        <div>
+          <h1>Traductor de Código Morse</h1>
+          <p class="subtitulo">Proyecto de Programación Web • Convierte texto a Morse y viceversa</p>
+        </div>
+      </div>
+      <div class="badge-modo" id="modoTextoBadge">Modo: Texto ➔ Morse</div>
+    </div>
+  </header>
+
+  <!-- Contenedor principal de la aplicación -->
+  <main class="contenedor-principal">
+
+    <!-- Barra de opciones: Cambiar sentido, LED y ejemplos -->
+    <section class="barra-herramientas">
+      <div class="grupo-modo">
+        <button id="btnCambiarModo" class="btn btn-modo" type="button">
+          <span class="icono-btn">⇄</span>
+          <span>Cambiar Sentido</span>
+        </button>
+
+        <!-- Indicador LED visual -->
+        <div class="indicador-led-caja">
+          <div class="luz-led" id="luzLed"></div>
+          <div class="info-led">
+            <span class="etiqueta-led">SEÑAL LED</span>
+            <span class="estado-led" id="estadoLuzTexto">EN ESPERA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ejemplos rápidos -->
+      <div class="ejemplos-rapidos">
+        <span class="titulo-ejemplos">Ejemplos:</span>
+        <button type="button" class="chip-ejemplo" data-texto="SOS">SOS</button>
+        <button type="button" class="chip-ejemplo" data-texto="HOLA MUNDO">Hola Mundo</button>
+        <button type="button" class="chip-ejemplo" data-texto="CODIGO MORSE">Código Morse</button>
+        <button type="button" class="chip-ejemplo" data-texto="ESTUDIANTE">Estudiante</button>
+      </div>
+    </section>
+
+    <!-- Cuadrícula con las dos cajas de traducción -->
+    <div class="cuadricula-traductor">
+
+      <!-- Caja 1: Entrada -->
+      <section class="tarjeta-traductor">
+        <div class="encabezado-tarjeta">
+          <h2 id="etiquetaEntrada">Texto a traducir:</h2>
+          <button id="btnLimpiar" class="btn btn-chico btn-secundario" type="button">
+            🗑️ Limpiar
+          </button>
+        </div>
+
+        <textarea
+          id="entradaTexto"
+          class="area-texto"
+          rows="6"
+          placeholder="Escribe aquí tu mensaje en texto normal..."
+          spellcheck="false"
+        ></textarea>
+
+        <!-- Botones para escribir morse fácilmente con un clic -->
+        <div class="botones-morse">
+          <span class="texto-ayuda">Teclado rápido:</span>
+          <button type="button" class="btn-morse" id="btnPunto"><b>•</b> Punto (.)</button>
+          <button type="button" class="btn-morse" id="btnRaya"><b>—</b> Raya (-)</button>
+          <button type="button" class="btn-morse" id="btnEspacio">␣ Espacio</button>
+          <button type="button" class="btn-morse" id="btnBarra">/ Palabra</button>
+          <button type="button" class="btn-morse btn-morse-borrar" id="btnBorrar">⌫ Borrar</button>
+        </div>
+      </section>
+
+      <!-- Caja 2: Salida -->
+      <section class="tarjeta-traductor">
+        <div class="encabezado-tarjeta">
+          <h2 id="etiquetaSalida">Código Morse resultante:</h2>
+          <button id="btnCopiar" class="btn btn-chico btn-secundario" type="button">
+            📋 Copiar
+          </button>
+        </div>
+
+        <textarea
+          id="salidaTexto"
+          class="area-texto area-morse"
+          rows="6"
+          readonly
+          placeholder="La traducción aparecerá automáticamente aquí..."
+          spellcheck="false"
+        ></textarea>
+
+        <!-- Barra inferior con botón de sonido -->
+        <div class="barra-acciones-salida">
+          <button id="btnReproducir" class="btn btn-reproducir" type="button">
+            <span>🔊 Reproducir Sonido</span>
+          </button>
+          <button id="btnDetener" class="btn btn-detener oculto" type="button">
+            <span>⏹ Detener Audio</span>
+          </button>
+          <span class="nota-audio">Escucha los pitidos con Web Audio API</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Sección Didáctica: Tabla de referencia del Alfabeto Morse -->
+    <section class="seccion-alfabeto">
+      <div class="encabezado-alfabeto">
+        <h2>📖 Alfabeto Morse</h2>
+        <p>Haz clic en cualquier letra o número para insertarlo directamente</p>
+      </div>
+      <div id="tablaAlfabeto" class="rejilla-alfabeto">
+        <!-- Generado dinámicamente con JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pie de página escolar -->
+  <footer class="pie-pagina">
+    <p>Proyecto Escolar: Traductor de Código Morse</p>
+    <p class="detalle-pie">Desarrollado con HTML5, CSS3 y JavaScript moderno</p>
+  </footer>
+
+</body>
+</html>
